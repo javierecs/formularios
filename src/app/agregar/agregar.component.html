@@ -35,9 +35,19 @@
             </div>
         </div>
         <br>
-        <button class="btn btn-primary" (click)="agregar()" [disabled]="formularioCreado.invalid">Agregar</button>
+        <button *ngIf="esNuevo" class="btn btn-primary" (click)="agregar()" [disabled]="formularioCreado.invalid">Agregar</button>
+        <button *ngIf="!esNuevo" class="btn btn-danger" (click)="editar()" [disabled]="formularioCreado.invalid">Editar</button>
     </form>
 
 </div>
 
 <p>Es valido: {{ formularioCreado.invalid }}</p>
+<br>
+<div class="container" *ngFor="let usuario of usuarios; let i = index">
+    <h4>{{ usuario.nombre }}</h4>
+    <p>{{ usuario.correo }}</p>
+    <p>{{ usuario.password }}</p>
+    <button class="btn btn-warning" (click)="editarUsuario(i)">Editar</button>
+    <button class="btn btn-danger" (click)="eliminarUsuario(i)">Eliminar</button>
+    <br>
+</div>
