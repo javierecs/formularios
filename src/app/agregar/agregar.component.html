@@ -1,1 +1,43 @@
-<p>agregar works!</p>
+<div class="container">
+
+    <form [formGroup]="formularioCreado">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre">
+            <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['nombre'].invalid && ( formularioCreado.controls['nombre'].dirty || formularioCreado.controls['nombre'].touched )">
+                <span *ngIf="formularioCreado.controls['nombre'].errors?.['required']">El nombre es requerido.</span>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Correo</label>
+            <input type="text" class="form-control" formControlName="correo">
+            <div *ngIf="formularioCreado.controls['correo'].invalid && ( formularioCreado.controls['correo'].dirty || formularioCreado.controls['correo'].touched )">
+                <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['correo'].errors?.['required']">
+                    Un correo es requerido.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['correo'].errors?.['email']">
+                    El correo no tiene el formato indicado.
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" formControlName="password">
+            <div *ngIf="formularioCreado.controls['password'].invalid && (formularioCreado.controls['password'].dirty || formularioCreado.controls['password'].touched )">
+                <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['password'].errors?.['required']">
+                    La contraseña es requerida.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['password'].errors?.['minlength']">
+                    La contraseña requiere tener al menos 8 caracteres.
+                </div>    
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary" (click)="agregar()" [disabled]="formularioCreado.invalid">Agregar</button>
+    </form>
+
+</div>
+
+<p>Es valido: {{ formularioCreado.invalid }}</p>
